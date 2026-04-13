@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shreyas Ghatage — MBA Finance</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal-dark:   #085041;
+      --teal-mid:    #0F6E56;
+      --teal-light:  #5DCAA5;
+      --teal-pale:   #E1F5EE;
+      --text-primary:   #1a1a1a;
+      --text-secondary: #5a5a5a;
+      --border:      rgba(0,0,0,0.10);
+      --bg-primary:  #ffffff;
+      --bg-secondary:#f7f8f7;
+      --radius-md:   8px;
+      --radius-lg:   12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-primary:   #f0f0f0;
+        --text-secondary: #a0a0a0;
+        --border:         rgba(255,255,255,0.10);
+        --bg-primary:     #141414;
+        --bg-secondary:   #1e1e1e;
+        --teal-pale:      #0a2e25;
+        --teal-light:     #1D9E75;
+        --teal-mid:       #1D9E75;
+        --teal-dark:      #5DCAA5;
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .site { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+    /* NAV */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 4rem;
+      position: sticky; top: 0; background: var(--bg-primary);
+      z-index: 100;
+    }
+    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: 13px; color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-mid); }
+
+    /* HERO */
+    .hero {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 2rem; align-items: start; margin-bottom: 5rem;
+    }
+    .hero-subtitle {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal-mid); margin-bottom: 0.75rem;
+    }
+    .hero-text h1 {
+      font-size: 38px; font-weight: 600; line-height: 1.15;
+      margin-bottom: 1rem; color: var(--text-primary);
+    }
+    .hero-text h1 em { font-style: normal; color: var(--teal-mid); }
+    .hero-bio {
+      font-size: 15px; line-height: 1.8; color: var(--text-secondary);
+      max-width: 520px; margin-bottom: 1.75rem;
+    }
+    .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      padding: 9px 22px; border-radius: var(--radius-md);
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; border: 1.5px solid;
+      font-family: inherit; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-primary {
+      background: var(--teal-mid); color: #fff;
+      border-color: var(--teal-mid);
+    }
+    .btn-primary:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+    .btn-outline {
+      background: transparent; color: var(--text-secondary);
+      border-color: var(--border);
+    }
+    .btn-outline:hover {
+      background: var(--bg-secondary); color: var(--text-primary);
+      border-color: rgba(0,0,0,0.2);
+    }
+    .btn-download {
+      background: var(--teal-pale); color: var(--teal-dark);
+      border-color: var(--teal-light);
+    }
+    .btn-download:hover { background: var(--teal-light); color: #fff; border-color: var(--teal-light); }
+
+    .avatar {
+      width: 104px; height: 104px; border-radius: 50%;
+      background: var(--teal-pale);
+      border: 1.5px solid var(--teal-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 600; color: var(--teal-mid);
+      flex-shrink: 0; letter-spacing: 0.02em;
+    }
+
+    /* SECTIONS */
+    .section { margin-bottom: 4rem; }
+    .section-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal-mid); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 0.5px;
+      background: var(--border);
+    }
+
+    /* EXPERIENCE */
+    .exp-item {
+      padding: 1.4rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-header {
+      display: flex; justify-content: space-between;
+      align-items: baseline; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 4px;
+    }
+    .exp-role { font-size: 15px; font-weight: 600; }
+    .exp-date { font-size: 12px; color: var(--text-secondary); }
+    .exp-company {
+      font-size: 13px; color: var(--teal-mid);
+      font-weight: 600; margin-bottom: 0.65rem;
+    }
+    .exp-bullets { list-style: none; padding: 0; }
+    .exp-bullets li {
+      font-size: 14px; color: var(--text-secondary);
+      line-height: 1.7; padding-left: 1.1rem;
+      position: relative; margin-bottom: 5px;
+    }
+    .exp-bullets li::before {
+      content: '–'; position: absolute; left: 0;
+      color: var(--teal-light);
+    }
+
+    /* EDUCATION */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .edu-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg); padding: 1.25rem 1.4rem;
+      border: 0.5px solid var(--border);
+    }
+    .edu-degree { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .edu-school { font-size: 13px; color: var(--teal-mid); font-weight: 600; margin-bottom: 4px; }
+    .edu-year { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+    .edu-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+
+    /* SKILLS */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      padding: 5px 14px; border-radius: 99px; font-size: 13px;
+      background: var(--bg-secondary);
+      border: 0.5px solid var(--border);
+      color: var(--text-secondary);
+      transition: all 0.15s;
+    }
+    .skill-tag:hover { border-color: var(--teal-light); color: var(--teal-mid); }
+    .skill-tag.highlight {
+      background: var(--teal-pale);
+      border-color: var(--teal-light);
+      color: var(--teal-dark);
+    }
+
+    /* CERTIFICATIONS */
+    .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .cert-item {
+      padding: 0.9rem 1rem;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      border: 0.5px solid var(--border);
+      font-size: 13px; color: var(--text-secondary); line-height: 1.4;
+      transition: border-color 0.2s;
+    }
+    .cert-item:hover { border-color: var(--teal-light); }
+    .cert-item span {
+      display: block; font-size: 10px; color: var(--teal-mid);
+      font-weight: 700; margin-bottom: 3px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-lg);
+      border: 0.5px solid var(--border);
+      background: var(--bg-secondary);
+      transition: border-color 0.2s;
+    }
+    .contact-item:hover { border-color: var(--teal-light); }
+    .contact-icon {
+      width: 38px; height: 38px;
+      border-radius: var(--radius-md);
+      background: var(--teal-pale);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 16px; height: 16px; }
+    .contact-label {
+      font-size: 10px; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 2px; font-weight: 600;
+    }
+    .contact-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+
+    /* LANGUAGES */
+    .lang-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .lang-item { display: flex; align-items: center; gap: 8px; }
+    .lang-name { font-size: 14px; font-weight: 600; }
+    .lang-level {
+      font-size: 12px; color: var(--text-secondary);
+      background: var(--bg-secondary); padding: 2px 10px;
+      border-radius: 99px; border: 0.5px solid var(--border);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 0.5px solid var(--border);
+      padding-top: 1.5rem; margin-top: 2rem;
+      text-align: center;
+      font-size: 12px; color: var(--text-secondary);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; }
+      .avatar { display: none; }
+      .edu-grid, .cert-grid, .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+      .hero-text h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <nav>
+      <div class="nav-logo">Shreyas Ghatage</div>
+      <div class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="hero-subtitle">MBA Finance · Banking &amp; Credit</p>
+        <h1>Hello, I'm<br><em>Shreyas Ghatage</em></h1>
+        <p class="hero-bio">
+          Detail-oriented MBA Finance graduate with expertise in financial documentation,
+          credit risk evaluation, and loan management. Adept at analyzing financial statements,
+          ensuring policy compliance, and supporting operational efficiency in the banking
+          and finance sector.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Get in touch</a>
+          <a href="Shreyas_Ghatage_Resume.pdf" download="Shreyas_Ghatage_Resume.pdf" class="btn btn-download">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 2v9M4 8l4 4 4-4"/><path d="M2 14h12"/>
+            </svg>
+            Download Resume
+          </a>
+          <a href="#experience" class="btn btn-outline">View experience ↓</a>
+        </div>
+      </div>
+      <div class="avatar">SG</div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <div class="section-label">Work Experience</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Intern</span>
+          <span class="exp-date">July 2024 – August 2024</span>
+        </div>
+        <div class="exp-company">Cosmos Co-operative Bank, Kolhapur</div>
+        <ul class="exp-bullets">
+          <li>Evaluated and processed loan applications including credit appraisal, risk assessment, and collateral verification, ensuring compliance with bank policies and regulations.</li>
+          <li>Maintained and updated loan documentation, enhancing accuracy, efficiency, and minimizing lending risks.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Audit Assistant</span>
+          <span class="exp-date">Jan 2022 – Jan 2023</span>
+        </div>
+        <div class="exp-company">Sandeep Sankpal &amp; Co., Kagal</div>
+        <ul class="exp-bullets">
+          <li>Monitored bank statements and reconciled with internal records consistently.</li>
+          <li>Assisted in statutory and internal audits by performing walkthroughs, testing controls, verifying financial records, and preparing detailed working papers to support audit conclusions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section" id="education">
+      <div class="section-label">Education</div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-degree">MBA — Finance</div>
+          <div class="edu-school">Sinhgad Business School, Pune</div>
+          <div class="edu-year">Aug 2023 – July 2025</div>
+          <div class="edu-desc">Financial management, investment analysis, corporate finance, credit risk assessment, portfolio management, and banking operations.</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">B.Com</div>
+          <div class="edu-school">D.R.K. College of Commerce, Kolhapur</div>
+          <div class="edu-year">June 2020 – March 2023</div>
+          <div class="edu-desc">Accounting principles, taxation, auditing, financial accounting, cost accounting, and business law.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="section-label">Skills</div>
+      <div class="skills-grid" style="margin-bottom: 2.5rem;">
+        <span class="skill-tag highlight">Financial modeling</span>
+        <span class="skill-tag highlight">Credit risk assessment</span>
+        <span class="skill-tag highlight">Loan management</span>
+        <span class="skill-tag">Accounting principles</span>
+        <span class="skill-tag">Data analysis</span>
+        <span class="skill-tag">Market research</span>
+        <span class="skill-tag">Risk management</span>
+        <span class="skill-tag">Problem solving</span>
+        <span class="skill-tag">Critical thinking</span>
+      </div>
+
+      <div class="section-label">Certifications</div>
+      <div class="cert-grid" style="margin-bottom: 2.5rem;">
+        <div class="cert-item"><span>Tool</span>Tally ERP</div>
+        <div class="cert-item"><span>Microsoft</span>Power BI</div>
+        <div class="cert-item"><span>Forage</span>Investment Banking</div>
+        <div class="cert-item"><span>NISM</span>SEBI Investor</div>
+        <div class="cert-item"><span>Skill</span>Advanced Excel</div>
+        <div class="cert-item"><span>Qualification</span>GDC &amp; A</div>
+      </div>
+
+      <div class="section-label">Languages</div>
+      <div class="lang-row">
+        <div class="lang-item">
+          <span class="lang-name">Marathi</span>
+          <span class="lang-level">Native</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Hindi</span>
+          <span class="lang-level">Proficient</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">English</span>
+          <span class="lang-level">Advanced</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="section-label">Contact</div>
+      <div class="contact-grid">
+        <a href="mailto:gshreyas477@gmail.com" class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="#0F6E56" stroke-width="1.8">
+              <rect x="1" y="3" width="14" height="10" rx="2"/>
+              <path d="M1 5l7 5 7-5"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">gshreyas477@gmail.com</div>
+          </div>
+        </a>
+
+        <a href="tel:+917058462702" class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="#0F6E56" stroke-width="1.8">
+              <path d="M2 2h3l1.5 4-2 1.5c1 2 2.5 3.5 4.5 4.5L10.5 10l4 1.5V15c-8 0-14-6-12.5-13z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+91 7058462702</div>
+          </div>
+        </a>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="#0F6E56" stroke-width="1.8">
+              <path d="M8 1C5.24 1 3 3.24 3 6c0 4 5 9 5 9s5-5 5-9c0-2.76-2.24-5-5-5z"/>
+              <circle cx="8" cy="6" r="1.5"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">Kagal, Kolhapur, Maharashtra</div>
+          </div>
+        </div>
+
+        <a href="https://www.linkedin.com/in/shreyas-ghatage-0a8779284" target="_blank" rel="noopener" class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 16 16" fill="#0F6E56">
+              <rect x="1.5" y="5.5" width="3" height="9" rx="0.5"/>
+              <circle cx="3" cy="3" r="1.5"/>
+              <path d="M7 5.5h2.5v1.8C9.9 6.3 10.8 5.5 12 5.5c2.2 0 3 1.5 3 3.5v5H12.5v-4.5c0-1-.3-1.8-1.3-1.8s-1.7.8-1.7 1.8v4.5H7V5.5z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">shreyas-ghatage ↗</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      Shreyas Ghatage &nbsp;·&nbsp; MBA Finance &nbsp;·&nbsp; Kolhapur, Maharashtra
+      &nbsp;·&nbsp; <a href="mailto:gshreyas477@gmail.com" style="color: var(--teal-mid);">gshreyas477@gmail.com</a>
+    </footer>
+
+  </div>
+</body>
+</html>
